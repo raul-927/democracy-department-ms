@@ -56,7 +56,7 @@ management:
         include: ['configprops', 'env', 'health', 'info', 'jhimetrics', 'logfile', 'loggers', 'prometheus', 'threaddump', 'liquibase']
   endpoint:
     health:
-      show-details: when_authorized
+      show-details: ALWAYS
       roles: 'ROLE_ADMIN'
       probes:
         enabled: true
@@ -99,6 +99,10 @@ management:
             enabled: true
 
 spring:
+  mybatis:
+    mapperLocations: classpath*:co/com/mundocostenio/as/mybatis/mappers/*.xml
+    typeAliasesPackage: com.democracy.department.mybatis.typeAlias
+    typeHandlersPackage: co.com.mundocostenio.as.mybatis.typeHandlers
   autoconfigure:
     exclude: org.springframework.boot.actuate.autoconfigure.metrics.jdbc.DataSourcePoolMetricsAutoConfiguration
   application:
@@ -138,14 +142,16 @@ spring:
       console-available: true
   security:
     oauth2:
+      resource:
+        token-info-uri: http://localhost:9091/oauth/check_token
       client:
         provider:
           oidc:
             issuer-uri: http://localhost:9080/auth/realms/jhipster
         registration:
           oidc:
-            client-id: internal
-            client-secret: internal
+            client-id: resourceserver
+            client-secret: resourceserversecret
             scope: openid,profile,email
 
 server:

@@ -47,6 +47,7 @@ spring:
       # it can be set to any label, branch or commit of the configuration source Git repository
   liquibase:
     # Remove 'faker' if you do not want the sample data to be loaded automatically
+    driverClassName: com.mysql.cj.jdbc.Driver
     contexts: dev, faker
     url: jdbc:mysql://localhost:3306/DemocracyDepartmentMs?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true
   messages:
